@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income Tax Calculator</title>
+</head>
+<body>
+
+  <h2>Income Tax Calculator</h2>
+
+  <label for="taxableIncome">Enter Taxable Income: </label>
+  <input type="number" id="taxableIncome" placeholder="Enter taxable income">
+
+  <button onclick="calculateIncomeTax()">Calculate Income Tax</button>
+
+  <h3>Result:</h3>
+  <p id="incomeTaxResult"></p>
+
+  <script>
+    function calculateIncomeTax() {
+      // Get input value
+      var taxableIncome = parseFloat(document.getElementById('taxableIncome').value);
+
+      // Check if the input is a valid number
+      if (isNaN(taxableIncome)) {
+        alert('Please enter a valid number for taxable income.');
+        return;
+      }
+
+      // Compute income tax based on the provided table
+      var incomeTax = 0;
+
+      if (taxableIncome <= 250000) {
+        incomeTax = 0;
+      } else if (taxableIncome <= 400000) {
+        incomeTax = 14000 + 0.2 * (taxableIncome - 250000);
+      } else if (taxableIncome <= 800000) {
+        incomeTax = 60000 + 0.25 * (taxableIncome - 400000);
+      } else if (taxableIncome <= 2000000) {
+        incomeTax = 169000 + 0.3 * (taxableIncome - 800000);
+      } else if (taxableIncome <= 8000000) {
+        incomeTax = 618000 + 0.32 * (taxableIncome - 2000000);
+      } else {
+        incomeTax = 3110000 + 0.35 * (taxableIncome - 8000000);
+      }
+
+      // Display result
+      document.getElementById('incomeTaxResult').textContent = `Income Tax: ₱${incomeTax.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
